@@ -8,6 +8,10 @@ import 'react-date-range/dist/theme/default.css';
 
 import map from './map.svg';
 
+const LINK = `https://cometari-airportsfinder-v1.p.rapidapi.com`;
+const HOST = `cometari-airportsfinder-v1.p.rapidapi.com`;
+const KEY  = `5dc0def65bmsh9f4807c6f5f3189p14a691jsne793e8319ffb`;
+
 const Wrap = styled.div`
   min-width: 100vw;
   min-height: 100vh;
@@ -194,11 +198,11 @@ export const Home = (props) => {
 
   useEffect(() => {
     if(!airport) return;
-    fetch(`https://cometari-airportsfinder-v1.p.rapidapi.com/api/airports/by-text?text=${airport}`, {
+    fetch(`${LINK}/api/airports/by-text?text=${airport}`, {
     	"method": "GET",
     	"headers": {
-    		"x-rapidapi-host": "cometari-airportsfinder-v1.p.rapidapi.com",
-    		"x-rapidapi-key": "5dc0def65bmsh9f4807c6f5f3189p14a691jsne793e8319ffb"
+    		"x-rapidapi-host": HOST,
+    		"x-rapidapi-key": KEY
     	}
     })
     .then(response => response.json()).then(body => {
@@ -220,10 +224,24 @@ export const Home = (props) => {
     <Wrap>
       <Content>
         <Text>
-          Мое гражданство: <List><Changable><span className="placeholder">Россия</span></Changable>
+          Мое гражданство: 
+          <List>
+            <Changable>
+              <span className="placeholder">
+                Россия
+              </span>
+            </Changable>
             <ListUl className="list__ul">
-              <ListUlLi><Option href="#">Россия</Option></ListUlLi>
-              <ListUlLi><Option href="#">Казахстан</Option></ListUlLi>
+              <ListUlLi>
+                <Option href="#">
+                  Россия
+                </Option>
+              </ListUlLi>
+              <ListUlLi>
+                <Option href="#">
+                  Казахстан
+                </Option>
+              </ListUlLi>
               { /* <ListUlLi><Option href="#">Украина</Option></ListUlLi>
               <ListUlLi><Option href="#">Узбекистан</Option></ListUlLi>
               <ListUlLi><Option href="#">Киргизия</Option></ListUlLi> */ }
@@ -231,7 +249,17 @@ export const Home = (props) => {
           </List>
           <br />
           <br />
-          Точка вылета/прилёта: <List><Changable><input className="placeholderAir" type="text" name="airport" value={airport} onChange={handleAirport} /></Changable>
+          Точка вылета/прилёта: 
+          <List>
+            <Changable>
+              <input 
+                className="placeholderAir" 
+                type="text" 
+                name="airport" 
+                value={airport} 
+                onChange={handleAirport} 
+              />
+            </Changable>
             <ListUl className="list__ulAir">
               { airports && airports }
             </ListUl>
@@ -245,7 +273,12 @@ export const Home = (props) => {
             ranges={state}
           />
         </Text>
-        <Link to={`/tickets/${airportShort}/${country}/${formatDate(state[0].startDate)}/${formatDate(state[0].endDate)}`} onClick={handleClick}>
+        <Link 
+          to={ 
+            `/tickets/${airportShort}/${country}/${formatDate(state[0].startDate)}/${formatDate(state[0].endDate)}` 
+          } 
+          onClick={handleClick}
+        >
           <Button>
             ПОДОБРАТЬ БИЛЕТЫ
           </Button>
