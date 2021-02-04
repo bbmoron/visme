@@ -12,7 +12,7 @@ import { Tickets } from './components/Tickets/Tickets';
 ReactDOM.render(<Router>
   <Switch>
     <Route path="/tickets/:airport/:citizenship/:to/:back" component={Tickets} />
-    { /* <Route path="/tickets/:citizenship" component={Tickets} /> */ }
+    { /* <Route path="/tickets/:citizenship" component={Tickets} /> */}
     <Route exact path="/" component={Home} />
   </Switch>
 </Router>, document.getElementById('root'));
